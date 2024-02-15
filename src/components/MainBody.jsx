@@ -16,6 +16,8 @@ const MainBody = () => {
         isCompleted: false
     }
     setTodoList([...todoList, task])
+    changeNewTask("")
+    
   }
   const deleteTask = (id)=>{
     setTodoList(todoList.filter((task)=>task.id!=id))
