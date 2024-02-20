@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState,useRef} from "react";
 import TaskH from "./TaskH";
 
 
 const MainBody = () => {
+
+  const inputRef = useRef(null);
   const [todoList, setTodoList] = useState([]);
   const [newTask, changeNewTask] = useState("");
 
@@ -16,6 +18,7 @@ const MainBody = () => {
         isCompleted: false
     }
     setTodoList([...todoList, task])
+    inputRef.current.value=""
     changeNewTask("")
     
   }
@@ -43,6 +46,7 @@ const MainBody = () => {
           className="px-3 py-2 text-xl font-bold bg-white border-2 border-slate-300"
           placeholder="Enter Your Task"
           type="text"
+          ref={inputRef}
         />
         <button
           onClick={addTask}
@@ -55,11 +59,6 @@ const MainBody = () => {
       <div className="flex flex-col items-center justify-center w-full bg-gray-100 list">
         {todoList.map((Task1,key)=>{
             return (
-                // <div key={key} className={`flex items-center justify-center gap-4 p-5 m-10  ${Task1.isCompleted ? 'bg-green-200':'bg-red-400'} border-black`}>
-                //     <h1 >{Task1.text}</h1>
-                //     <button onClick={()=>completeTask(Task1.id)} className="px-2 py-1 border-2 border-black">Complete task</button>
-                //     <button onClick={()=>deleteTask(Task1.id)} className="px-2 py-1 border-2 border-black">Delete Task</button>
-                // </div>
                 <TaskH key={key} id={Task1.id} isCompleted={Task1.isCompleted} text={Task1.text} completeTask={completeTask} deleteTask={deleteTask}/>
             )
         })}
